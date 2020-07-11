@@ -10,6 +10,52 @@ class Aparat:
         self.username=UserName
         self.password=Password
         
+class YouTube:
+        
+    def SetUpDriver(self,HeadLess=True):
+        options = webdriver.ChromeOptions()
+        if HeadLess:
+            options.add_argument('headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        #options.add_argument('--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1')
+        Drive = webdriver.Chrome(options=options)
+        self.Driver=Drive
+        
+    def CloseDriver(self):
+        self.Driver.close()
+
+    def GoToVideoPage(self,UserName):
+        self.Driver.get("https://www.youtube.com/c/"+UserName+"/videos")
+        print ("Currntly We Are In >> "+str(UserName))
+        
+    def MineLinks_WhenInVideoPage(self,HowMany="All"):
+        RawLinks = self.Driver.find_elements_by_id("video-title")
+        Links=[]
+        for x in RawLinks:
+            Links.append(str(x.get_attribute("href")))
+        if HowMany=="All":
+            HowMany=len(Links)
+        return Links[0:HowMany]
+
+    def LinkDownload(self,Link):
+        Video = pafy.new(Link)
+        Best = Video.getbest()
+        #Resolution=Best.resolution
+        DownloadLink = Best.url
+        return DownloadLink
+    
+    def VideoDetails(self,Link):
+        Video = pafy.new(Link)
+        Details={ 
+        "Title" : Video.title ,
+        "Rate" : Video.rating ,
+        "Views" : Video.viewcount ,
+        "Duration" : Video.duration ,
+        "Author" : Video.author     
+        }
+        
+        return Details
 
 class DataStuff:
 
@@ -192,3 +238,45 @@ class DataStuff:
     def Pwd(self):
         return str(os.getcwd())
         
+
+
+
+print (YouTube().VideoDetails("https://www.youtube.com/watch?v=217WsOwSVS8"))
+a.SetUpDriver()
+a.GoToVideoPage("Samsung")
+Links= (a.MineLinks_WhenInVideoPage())
+print (a.LinkDownload(Links[0]))
+print (a.VideoDetails(Links[0]))
+
+
+
+
+
+# Behind The Scene
+#Dont Look : )
+#Maybe a code is Naked
+'''a=YouTube()
+a.SetUpDriver()
+a.GoToVideoPage("Samsung")
+Links= (a.MineLinks_WhenInVideoPage())'''
+'''from pytube import YouTube
+YouTube('https://www.youtube.com/watch?v=VN7Osrd3DF8').streams.get_highest_resolution().download()
+'''
+'''import pafy
+url = "https://www.youtube.com/watch?v=bMt47wvK6u0"
+video = pafy.new(url)
+print (video.title)
+print (video.rating)
+print (video.viewcount)
+print (video.duration)
+print (video.description)
+'''
+'''import pafy
+url = "https://www.youtube.com/watch?v=FCRmIoX6PTA"
+video = pafy.new(url)
+best = video.getbest()
+print (best.resolution, best.extension)
+streams = video.streams
+for s in streams:
+    print(s.resolution, s.extension, s.get_filesize(), s.url)
+'''
