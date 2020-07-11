@@ -241,7 +241,7 @@ class DataStuff:
 
 
 
-print (YouTube().VideoDetails("https://www.youtube.com/watch?v=217WsOwSVS8"))
+a=YouTube()
 a.SetUpDriver()
 a.GoToVideoPage("Samsung")
 Links= (a.MineLinks_WhenInVideoPage())
