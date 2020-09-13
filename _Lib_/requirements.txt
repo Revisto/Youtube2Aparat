@@ -1,0 +1,6 @@
+requests>=2.22.0
+selenium>=3.141.0
+datetime>=4.3
+pafy>=0.5.5
+progressbar>=2.5
+translate>=3.5.0

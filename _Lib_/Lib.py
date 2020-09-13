@@ -7,6 +7,12 @@ import random
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import os
-from imp import reload
+from importlib import reload
 import datetime
 import pafy
+import json
+import pickle
+from progress.bar import ChargingBar
+from progress.spinner import Spinner
+import threading
+from translate import Translator
