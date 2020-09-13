@@ -4,3 +4,5 @@ datetime>=4.3
 pafy>=0.5.5
 progressbar>=2.5
 translate>=3.5.0
+youtube_dl>=2020.9.6
+progress>=1.5
