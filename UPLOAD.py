@@ -1,2 +1,8 @@
 from _C_ import *
-Full_Programs().AutoVideoUpload()        
+
+while True:
+    try:
+        Full_Programs().AutoVideoUpload()  
+        sleep(15*60)
+    except Exception as e:
+        Telegram().SendNakedMessage('an Error  -------  '+str(e))

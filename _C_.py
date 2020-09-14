@@ -438,7 +438,7 @@ class Full_Programs:
     
     def UploadVideo(self):
         Revistube=YouTube()
-        while True:
+        if True:
             RandomListOfContents=(DataStuff().ContentTarget())
             Telegram().SendNakedMessage("Start Mining to find a post")
             for Content in RandomListOfContents:
@@ -456,7 +456,7 @@ class Full_Programs:
                             print (Duration)
                         except:
                             Duration='99:99:99'
-                        if int(Duration[0])==0 and int(Duration[1])<=20:
+                        if int(Duration[0])==0 and int(Duration[1])<=30:
                             Telegram().SendNakedMessage("Found a Post")
                             Telegram().SendNakedMessage("Duratios is  "+str(Duration))
                             print ('Found One')
